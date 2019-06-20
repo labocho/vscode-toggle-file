@@ -10,14 +10,56 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:extension.toggleFile"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [{
-			"command": "extension.helloWorld",
-			"title": "Hello World"
-		}]
+			"command": "extension.toggleFile",
+			"title": "Toggle file"
+		}],
+		"configuration": {
+			"type": "object",
+			"title": "Toggle file rules",
+			"properties": {
+				"toggleFile.rules": {
+					"type": "array",
+					"default": [
+						{
+							"from": "app/(.+).rb",
+							"to": "spec/$1_spec.rb"
+						},
+						{
+							"from": "script/(.+).rb",
+							"to": "spec/script/$1_spec.rb"
+						},
+						{
+							"from": "lib/(.+).rb",
+							"to": "spec/$1_spec.rb"
+						},
+						{
+							"from": "spec/(controllers|decorators|helpers|jobs|mailers|models|uploaders|validators|views)/(.+)_spec.rb",
+							"to": "app/$1/$2.rb"
+						},
+						{
+							"from": "spec/script/(.+)_spec.rb",
+							"to": "script/$1.rb"
+						},
+						{
+							"from": "spec/(.+)_spec.rb",
+							"to": "lib/$1.rb"
+						}
+					]
+				}
+			}
+		},
+		"keybindings": [
+			{
+				"command": "extension.toggleFile",
+				"key": "alt+ctrl+down",
+				"mac": "alt+cmd+down"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
@@ -32,5 +74,10 @@
 		"tslint": "^5.12.1",
 		"@types/node": "^10.12.21",
 		"@types/mocha": "^2.2.42"
+	},
+	"publisher": "labocho",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/labocho/vscode-toggle-file.git"
 	}
 }

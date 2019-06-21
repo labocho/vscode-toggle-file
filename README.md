@@ -56,6 +56,10 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 Users appreciate release notes as you update your extension.
 
+### 0.0.3
+
+fix problem when file creation on existed directory.
+
 ### 0.0.2
 
 `mkdir -p` when create file.

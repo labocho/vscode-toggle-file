@@ -69,7 +69,12 @@ export function activate(context: vscode.ExtensionContext) {
 		if (convertedByfirstMatch !== null) {
 			vscode.window.showInputBox({prompt: "Create new file?", value: convertedByfirstMatch}).then((new_file) => {
 				if (new_file === undefined) { return; }
-				fs.mkdirSync(path.dirname(new_file), {recursive: true});
+
+				const dir = path.dirname(new_file);
+				if (!fs.existsSync(dir)) {
+					fs.mkdirSync(path.dirname(new_file), { recursive: true });
+				}
+
 				fs.writeFileSync(new_file, "");
 				vscode.workspace.openTextDocument(new_file).then((doc) => {
 					fs.unlinkSync(new_file);

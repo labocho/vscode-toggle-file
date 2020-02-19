@@ -2,7 +2,7 @@
 	"name": "toggle-file",
 	"displayName": "Toggle file",
 	"description": "Add \"Toggle file\" command that toggles file between eg. test and tested file.",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"engines": {
 		"vscode": "^1.35.0"
 	},
@@ -30,6 +30,10 @@
 							"to": "spec/$1_spec.rb"
 						},
 						{
+							"from": "app/(.+)",
+							"to": "spec/$1_spec.rb"
+						},
+						{
 							"from": "script/(.+).rb",
 							"to": "spec/script/$1_spec.rb"
 						},
@@ -38,7 +42,11 @@
 							"to": "spec/$1_spec.rb"
 						},
 						{
-							"from": "spec/(controllers|decorators|helpers|jobs|mailers|models|uploaders|validators|views)/(.+)_spec.rb",
+							"from": "spec/views/(.+)_spec.rb",
+							"to": "app/views/$1"
+						},
+						{
+							"from": "spec/(controllers|decorators|helpers|jobs|mailers|models|uploaders|validators)/(.+)_spec.rb",
 							"to": "app/$1/$2.rb"
 						},
 						{
